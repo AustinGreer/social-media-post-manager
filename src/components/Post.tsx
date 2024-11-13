@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRouter } from "next/router";
 import { Card } from "@mui/material";
 import { Box } from "@mui/material";
 import { Typography } from '@mui/material';
@@ -9,10 +9,13 @@ import PlayCircleFilledRounded from "@mui/icons-material/PlayCircleFilledRounded
 import ArticleRounded from "@mui/icons-material/ArticleRounded";
 
 function Post({ post }) {
+  const router = useRouter();
+  
   return (
     <Card
       sx={{
         display: 'flex',
+        cursor: 'pointer',
         mb: 2,
         p: 2,
         bgcolor: 'var(--surface)',
@@ -21,6 +24,7 @@ function Post({ post }) {
           transform: 'translateY(-4px)'
         }
       }}
+      onClick={() => router.push(`/posts/${post.id}`)}
     >
       {/* Thumbnail */}
       <Box
@@ -84,30 +88,6 @@ function Post({ post }) {
           >
             {post.type}
           </Typography>
-        </Box>
-
-        <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
-          <Button
-            variant="contained"
-            startIcon={<Edit />}
-            size="small"
-            sx={{
-              bgcolor: 'var(--primary)',
-              '&:hover': {
-                bgcolor: 'var(--primary-hover)'
-              }
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            variant="contained"
-            startIcon={<Delete />}
-            size="small"
-            color="error"
-          >
-            Delete
-          </Button>
         </Box>
       </Box>
     </Card>

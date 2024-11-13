@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import api from "../../api";
+import api from "../services/api";
 
 export default function useFetchPosts() {
   const [posts, setPosts] = useState([]);
