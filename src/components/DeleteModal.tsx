@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useRouter } from "next/router"
-import { Dialog, DialogTitle, DialogContent, Typography, DialogContentText, DialogActions, Button } from "@mui/material"
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@mui/material"
 
-import useModifyPost from "@/hooks/useModifyPost";
+import { deletePost } from "@/services/postsApi";
 import ErrorBanner from "./ErrorBanner";
 
 function DeleteModal({ openModal, handleCloseModal, postId }) {
   const router = useRouter();
-  const { deletePost } = useModifyPost();
   const [error, setError] = useState(null);
 
   const handleDeletePost = async () => {

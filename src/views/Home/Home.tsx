@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import PostList from "@/components/PostList";
 import Container from "@/components/Container";
-import SearchFilter from "@/components/SearchFilter/SearchFilter";
+import SearchFilter from "@/components/SearchFilter";
 import useFetchPosts from "@/hooks/useFetchPosts";
 
 export default function Home() {
-  const { posts, fetchPosts, filterPosts } = useFetchPosts();
+  const { posts, fetchAllPosts, filterPostsBySearch, filterPostsByType } = useFetchPosts();
 
   useEffect(() => {
-    fetchPosts();
-  }, [fetchPosts])
+    fetchAllPosts();
+  }, [fetchAllPosts])
 
   return (
     <Container>
-      <SearchFilter filterPosts={filterPosts} />
+      <SearchFilter filterPostsBySearch={filterPostsBySearch} filterPostsByType={filterPostsByType} />
       <PostList posts={posts} />
     </Container>
   );

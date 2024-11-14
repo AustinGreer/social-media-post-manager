@@ -1,32 +1,35 @@
 import { useState, useCallback } from "react";
-import api from "../services/api";
+import { getPosts, searchPosts, fetchPostsByType } from "@/services/postsApi";
 
 export default function useFetchPosts() {
   const [posts, setPosts] = useState([]);
 
-  const fetchPosts = useCallback(async () => {
+  const fetchAllPosts = useCallback(async () => {
     try {
-      const response = await api.get("/posts");
-      setPosts(response.data);
+      const response = await getPosts();
+      setPosts(response);
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
   }, []);
 
-  const filterPosts = async (searchTerm = "") => {
+  const filterPostsBySearch = async (searchTerm = "") => {
     try {
-      const params = searchTerm ? { title: searchTerm } : {};
-      const response = await api.get("/posts", {params});
-      setPosts(response.data);
+      const result = await searchPosts(searchTerm);
+      setPosts(result);
     } catch (error) {
-      // adding this to treat "Not Found" errors as empty objects
-      if (error.response?.status === 404) {
-        setPosts([]);
-      } else {
-        console.error("error occurred while filtering posts:", error)
-      }
+      throw error;
     }
   }
 
-  return { posts, fetchPosts, filterPosts }
+  const filterPostsByType = async (type = "all") => {
+    try {
+      const result = await fetchPostsByType(type);
+      setPosts(result);
+    } catch (error) {
+      console.error("Error fetching posts by type:", error);
+    }
+  };
+
+  return { posts, fetchAllPosts, filterPostsBySearch, filterPostsByType }
 }

@@ -9,20 +9,21 @@
   --background: #121212;
   --surface: #1E1E1E;
   --surface-light: #2D2D2D;
-  
+
   /* Text Colors */
   --text-primary: #FFFFFF;
   --text-secondary: #DFE3FA;
   --text-muted: #888EA8;
-  --text-dark: #1E2139;        /* Dark color for text on light backgrounds */
+  --text-dark: #1E2139;
+  /* Dark color for text on light backgrounds */
   --text-dark-secondary: #373B53;
-  
+
   /* UI Colors */
   --border: #333333;
   --success: #4CAF50;
   --error: #FF5252;
   --warning: #FFC107;
-  
+
   /* Spacing System */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -68,6 +69,18 @@ body {
     --container-padding-y: var(--spacing-lg);
     --container-max-width: 77.25rem;
   }
+}
+
+/* Global Styles for inputs */
+.MuiOutlinedInput-root {
+  background-color: var(--surface-light);
+  border-radius: var(--border-radius-sm);
+}
+
+.MuiInputBase-input,
+.MuiOutlinedInput-input,
+.MuiInputBase-inputMultiline {
+  color: var(--text-primary);
 }
 
 /* Post Card Styles */
@@ -142,8 +155,33 @@ body {
   font-weight: 500;
 }
 
-/* Focus states for accessibility */
 .post-card:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+}
+
+/* Search wrapper styles */
+.searchWrapper {
+  margin-bottom: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.searchInput {
+  width: 66.666%;
+}
+
+.searchInput input {
+  color: var(--text-primary);
+  background-color: var(--surface);
+}
+
+.searchInput .MuiOutlinedInput-root,
+.searchInput .MuiOutlinedInput-adornedStart {
+  background-color: var(--surface);
+}
+
+.searchInput svg {
+  color: var(--text-secondary);
 }
